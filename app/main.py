@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.database import init_db
 from app.routers import calculator, users
+from app.middleware.security_headers import SecurityHeadersMiddleware
 
 
 @asynccontextmanager
@@ -33,6 +34,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(SecurityHeadersMiddleware)
 
 # 라우터 등록
 app.include_router(users.router)
