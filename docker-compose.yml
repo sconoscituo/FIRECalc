@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    container_name: firecalc-api
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./firecalc.db:/app/firecalc.db
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///./firecalc.db
+    env_file:
+      - .env
+    restart: unless-stopped
